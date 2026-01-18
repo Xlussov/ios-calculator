@@ -1,0 +1,545 @@
+body {
+  background-color: var(--color-white);
+  color: var(--color-white);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.calculator {
+  border-radius: 20px;
+  background: var(--color-black);
+  width: auto;
+  height: 40rem;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.history-button-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.history-button-wrapper .history-button {
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.history-button-wrapper .history-button:hover,
+.history-button-wrapper .history-button:active {
+  transform: scale(1.05);
+  transition: all 0.1s ease-in-out;
+}
+
+.history-button-wrapper .history-button img {
+  width: 30px;
+  height: 30px;
+}
+
+.history-overlay {
+  width: 100%;
+  position: absolute;
+  z-index: 25;
+  pointer-events: none;
+}
+
+.history-overlay.active {
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  background-color: rgba(1, 1, 1, 0.5);
+}
+
+.history-overlay .history-menu {
+  border-radius: 12px;
+  position: relative;
+  width: 100%;
+  height: 620px;
+  z-index: 25;
+  bottom: -40px;
+  background-color: var(--color-btn-dark);
+  transition: all var(--animation-time) ease-in-out;
+  transform: translateY(620px);
+  display: flex;
+  flex-direction: column;
+}
+
+.history-overlay.active .history-menu {
+  transform: translateY(0px);
+  transition: all var(--animation-time) ease-in-out;
+}
+
+.history-overlay .history-menu .done-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+}
+
+.done-button-wrapper .done-button {
+  color: var(--color-primary);
+  font-weight: 500;
+  font-size: 16px;
+  background-color: transparent;
+  margin: 7px 15px;
+  transition: all var(--animation-time) ease-in-out;
+}
+
+.done-button-wrapper .done-button:hover,
+.done-button-wrapper .done-button:active {
+  transition: all var(--animation-time) ease-in-out;
+  color: var(--color-primary-hover);
+}
+
+.history-menu .edit-menu {
+  height: 70px;
+  width: 100%;
+  background-color: var(--color-btn-dark-hover);
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.history-menu .edit-menu button {
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 10px 15px;
+}
+
+.history-menu .edit-menu .edit-button {
+  color: var(--color-primary);
+}
+
+.history-menu .edit-menu .clear-button {
+  color: var(--color-danger);
+}
+.history-overlay .history-menu .history-list {
+  flex: 1 1 auto;
+  padding-left: 15px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.history-overlay .history-menu .history-list::-webkit-scrollbar {
+  width: 2px !important;
+  background: transparent !important;
+}
+
+.history-overlay .history-menu .history-list::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.history-overlay .history-menu .history-list::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb-color) !important;
+  border-radius: 0 !important;
+}
+
+.history-overlay .history-menu .history-list::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.history-overlay .history-menu .history-list::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+/** history item */
+
+.historry-item-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px 12px 0px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.history-item .expression {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  padding: 8px 0px;
+}
+
+.history-item .result {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-white);
+}
+
+.historry-bin {
+  transition: all var(--animation-time) linear;
+  width: 22px;
+  cursor: pointer;
+  transform: translateX(50px);
+}
+
+.historry-bin.editMode {
+  transition: all var(--animation-time) linear;
+  transform: translateX(0px);
+}
+
+.history-item .expression,
+.history-item .result {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.history-item .expression:hover,
+.history-item .result:hover {
+  opacity: 0.7;
+}
+
+.history-item .expression:active,
+.history-item .result:active {
+  transform: scale(0.98);
+}
+
+.toast-notification {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(50, 50, 50, 0.9);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.toast-notification.show {
+  opacity: 1;
+}
+
+/** history item */
+
+.display {
+  width: 300px;
+  min-height: 60px;
+
+  color: var(--color-white);
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1.2;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.display-content {
+  text-align: right;
+
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  white-space: nowrap;
+  text-align: right;
+  user-select: none;
+
+  white-space: nowrap;
+  overflow-x: auto;
+  text-align: right;
+  cursor: default;
+}
+
+.display-content::-webkit-scrollbar {
+  height: 0px;
+}
+
+.display-content::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb-color);
+  min-width: 24px;
+}
+
+.display-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.keypad {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+
+.keypad .scientific-pad-wrap {
+  height: 100%;
+  overflow: hidden;
+}
+
+.keypad .scientific-pad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  z-index: 3;
+  height: 0;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(150px);
+  margin-right: 0;
+  transition: var(--animation-time) all ease-in-out;
+}
+
+.keypad.scientific-mode .scientific-pad {
+  height: 120px;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0px);
+  transition: var(--animation-time) all ease-in-out;
+}
+
+.btn {
+  border: none;
+  border-radius: 50%;
+  height: var(--btn-size);
+  width: var(--btn-size);
+  font-size: 2rem;
+  font-weight: 400;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-white);
+  text-align: center;
+  transition: var(--animation-time) all ease-in-out;
+}
+
+.scientific-pad .btn {
+  width: var(--btn-size);
+  height: 35px;
+  font-size: 0.85rem;
+  border-radius: 25px;
+}
+
+.keypad.scientific-mode .basic-pad {
+  position: relative;
+  background-color: var(--color-black);
+}
+
+.keypad.scientific-mode .basic-pad .btn {
+  width: var(--btn-size);
+  height: 40px;
+  font-size: 1.25rem;
+  border-radius: 25px;
+}
+
+.btn img {
+  width: 45%;
+  height: 45%;
+}
+
+.btn-dark {
+  background-color: var(--color-btn-dark);
+}
+.btn-dark:active,
+.btn-dark:hover {
+  background-color: var(--color-btn-dark-hover);
+}
+
+.btn-secondary {
+  background-color: var(--color-btn-secondary);
+  color: var(--color-white);
+  font-size: 1.75rem;
+}
+.btn-secondary:active,
+.btn-secondary:hover {
+  background-color: var(--color-btn-secondary-hover);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  font-size: 2.5rem;
+}
+.btn-primary:active,
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.calculator-btn {
+  position: absolute;
+  bottom: 0px;
+  z-index: 10;
+  transition: var(--animation-time) all ease-in-out;
+}
+
+.calculator-btn .calculator-icon {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  transition: 0.1s all ease-in-out;
+  opacity: 1;
+  bottom: 20px;
+  left: 20px;
+}
+
+/* ! */
+.keypad.scientific-mode .basic-pad .calculator-btn .calculator-icon {
+  width: 20px;
+  height: 20px;
+  bottom: 10px;
+  left: 23px;
+  transition: var(--animation-time) all ease-in-out;
+}
+
+.keypad .calculator-btn.active,
+.keypad.scientific-mode .calculator-btn.active {
+  border-radius: 30px;
+  width: 170px;
+  height: 130px;
+  transition: var(--animation-time) all ease-in-out;
+}
+
+.calculator-btn.active:hover,
+.calculator-btn.active:active {
+  background-color: var(--color-btn-dark);
+}
+
+.calculator-btn.active .calculator-icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  transition: 0.05s all ease-in-out;
+  opacity: 0;
+}
+
+.calculator-btn .menu {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height var(--animation-time) ease,
+    opacity 0.25s ease;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.calculator-btn.active .menu {
+  position: relative;
+  max-height: 130px;
+  opacity: 1;
+  z-index: 20;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  background: transparent;
+  padding: 10px 14px;
+  border-radius: 12px;
+
+  color: var(--color-white);
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: var(--color-btn-dark-hover);
+}
+
+.menu-item:active {
+  background: var(--color-btn-dark-hover);
+}
+
+.menu-item svg {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+
+.menu-item.selected {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.menu-item.selected svg path {
+  fill: var(--color-primary);
+}
+
+.cell-wrapper {
+  z-index: 10;
+  position: relative;
+}
+
+.calc-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(1, 1, 1, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: -1;
+  opacity: 0;
+  transition: all var(--animation-time) ease;
+  border-radius: 20px;
+}
+
+.calc-overlay.active {
+  opacity: 1;
+  z-index: 7;
+}
+
+.basic-pad .clean-btn img {
+  width: 70%;
+  height: 70%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#ac-button,
+#ce-button {
+  pointer-events: none;
+}
+
+.token {
+  font-size: 48px;
+  font-weight: 300;
+}
+
+.token.paren {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.token.paren.ghost {
+  opacity: 0.4;
+}
+
+.token.function,
+.token.number,
+.token.operator,
+.token.constant {
+  color: #fff;
+}

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/styles/main.css" />
+    <title>Calculator</title>
+  </head>
+  <body>
+    <div class="calculator">
+      <div class="history-button-wrapper">
+        <button class="history-button" id="history-button">
+          <img src="./assets/images/icon/menu-icon.svg" alt="menu icon" />
+        </button>
+      </div>
+      <div class="display">
+        <div class="display-content">0</div>
+      </div>
+      <div class="keypad">
+        <div class="scientific-pad-wrap">
+          <div class="scientific-pad pad">
+            <button class="btn btn-dark" data-type="GROUPING" data-value="LEFT_PAREN">(</button>
+            <button class="btn btn-dark" data-type="GROUPING" data-value="RIGHT_PAREN">)</button>
+            <button class="btn btn-dark" data-type="UNARY_FUNCTION" data-value="X_SQUARED">
+              x<sup>2</sup>
+            </button>
+            <button class="btn btn-dark" data-type="UNARY_FUNCTION" data-value="X_CUBED">
+              x<sup>3</sup>
+            </button>
+            <button class="btn btn-dark" data-type="UNARY_FUNCTION" data-value="SQRT">√x</button>
+            <button class="btn btn-dark" data-type="UNARY_FUNCTION" data-value="CBRT">∛x</button>
+            <button class="btn btn-dark" data-type="UNARY_FUNCTION" data-value="X_FACTORIAL">
+              x!
+            </button>
+            <button class="btn btn-dark" data-type="CONSTANT" data-value="PI">π</button>
+
+            <button class="btn btn-dark" data-type="UNARY_FUNCTION" data-value="SIN">sin</button>
+            <button class="btn btn-dark" data-type="UNARY_FUNCTION" data-value="COS">cos</button>
+            <button class="btn btn-dark" data-type="UNARY_FUNCTION" data-value="TAN">tan</button>
+            <button class="btn btn-dark" data-type="BINARY_OPERATOR" data-value="PERCENT">%</button>
+          </div>
+        </div>
+        <div class="basic-pad pad">
+          <button class="btn btn-secondary clean-btn" data-type="UNARY_FUNCTION" data-value="CLEAR">
+            <span id="ac-button">AC</span>
+            <img src="./assets/images/icon/delete-icon.svg" alt="delete-icon" id="ce-button" />
+          </button>
+
+          <button class="btn btn-secondary" data-type="UNARY_FUNCTION" data-value="SIGN">
+            <img src="./assets/images/icon/plus-minus-icon.svg" alt="" />
+          </button>
+
+          <button class="btn btn-secondary" data-type="BINARY_OPERATOR" data-value="PERCENT">
+            %
+          </button>
+          <button class="btn btn-primary" data-type="BINARY_OPERATOR" data-value="DIVIDE">÷</button>
+
+          <button class="btn btn-dark" data-type="NUMBER" data-value="SEVEN">7</button>
+          <button class="btn btn-dark" data-type="NUMBER" data-value="EIGHT">8</button>
+          <button class="btn btn-dark" data-type="NUMBER" data-value="NINE">9</button>
+          <button class="btn btn-primary" data-type="BINARY_OPERATOR" data-value="MULTIPLY">
+            ×
+          </button>
+
+          <button class="btn btn-dark" data-type="NUMBER" data-value="FOUR">4</button>
+          <button class="btn btn-dark" data-type="NUMBER" data-value="FIVE">5</button>
+          <button class="btn btn-dark" data-type="NUMBER" data-value="SIX">6</button>
+          <button class="btn btn-primary" data-type="BINARY_OPERATOR" data-value="MINUS">−</button>
+
+          <button class="btn btn-dark" data-type="NUMBER" data-value="ONE">1</button>
+          <button class="btn btn-dark" data-type="NUMBER" data-value="TWO">2</button>
+          <button class="btn btn-dark" data-type="NUMBER" data-value="THREE">3</button>
+          <button class="btn btn-primary" data-type="BINARY_OPERATOR" data-value="PLUS">+</button>
+
+          <div class="cell-wrapper">
+            <div class="btn btn-dark calculator-btn calc-menu" id="calc-mode">
+              <img
+                class="calculator-icon"
+                src="./assets/images/icon/calculator-icon.svg"
+                alt="calculator icon"
+              />
+              <div class="menu">
+                <button class="menu-item selected" id="BASIC">
+                  <svg
+                    version="1.0"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="512.000000pt"
+                    height="512.000000pt"
+                    viewBox="0 0 512.000000 512.000000"
+                    preserveAspectRatio="xMidYMid meet"
+                  >
+                    <g
+                      transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                      fill="#fff"
+                      stroke="none"
+                    >
+                      <path
+                        d="M1292 4624 c-18 -10 -45 -33 -60 -52 l-27 -35 -3 -249 -3 -248 -235
+                        0 c-262 0 -283 -4 -330 -65 -52 -68 -37 -169 34 -223 l35 -27 249 -3 248 -3 0
+                        -235 c0 -264 4 -283 68 -332 46 -35 135 -38 178 -6 69 51 69 50 72 324 l3 249
+                        248 3 248 3 37 29 c90 68 86 190 -8 260 -26 20 -43 21 -276 24 l-249 3 -3 249
+                        c-3 233 -4 250 -24 276 -50 67 -135 92 -202 58z"
+                      />
+                      <path
+                        d="M3095 4026 c-67 -29 -105 -106 -91 -181 9 -47 59 -102 104 -115 25
+                        -8 244 -10 673 -8 l636 3 35 27 c94 71 82 214 -22 269 -33 18 -70 19 -670 19
+                        -505 -1 -641 -3 -665 -14z"
+                      />
+                      <path
+                        d="M3691 2309 c-81 -25 -160 -96 -200 -179 -37 -79 -37 -191 0 -271 99
+                      -210 368 -260 529 -99 66 66 95 138 95 235 0 65 -5 90 -26 135 -31 65 -96 132
+                      -158 162 -52 25 -183 34 -240 17z"
+                      />
+                      <path
+                        d="M870 2048 c-79 -40 -111 -123 -79 -205 6 -15 85 -103 177 -196 l167
+                        -167 -167 -168 c-91 -92 -171 -177 -177 -189 -18 -35 -13 -102 10 -143 38 -67
+                        123 -97 196 -69 15 6 103 85 196 177 l167 167 163 -162 c89 -88 176 -168 194
+                        -177 72 -36 167 -6 203 64 22 43 26 103 10 146 -6 15 -85 102 -175 194 l-165
+                        166 160 159 c88 88 167 174 175 191 35 73 9 164 -57 204 -96 58 -138 38 -343
+                        -169 l-159 -161 -167 165 c-205 203 -236 219 -329 173z"
+                      />
+                      <path
+                        d="M3693 1286 c-129 -42 -215 -149 -229 -285 -19 -175 119 -342 295
+                      -358 76 -7 139 9 207 52 138 88 189 261 123 414 -26 60 -101 134 -167 163 -59
+                      26 -171 33 -229 14z"
+                      />
+                    </g>
+                  </svg>
+                  <span class="label">Basic</span>
+                </button>
+
+                <button class="menu-item" id="SCIENTIFIC">
+                  <svg
+                    width="800px"
+                    height="800px"
+                    viewBox="0 0 48 48"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <title>functions</title>
+                    <g id="Layer_2" data-name="Layer 2" fill="#fff">
+                      <g id="invisible_box" data-name="invisible box">
+                        <rect width="48" height="48" fill="none" />
+                      </g>
+                      <g id="Q3_icons" data-name="Q3 icons">
+                        <g>
+                          <path
+                            d="M24,25.9a14.7,14.7,0,0,1,3.5-9.6,2,2,0,0,0-3-2.6A18.2,18.2,0,0,0,20,25.9a18.4,18.4,0,0,0,4.5,12.5A2.2,2.2,0,0,0,26,39a2.4,2.4,0,0,0,1.4-.5,2.2,2.2,0,0,0,.1-2.9A14.2,14.2,0,0,1,24,25.9Z"
+                          />
+                          <path
+                            d="M41.5,13.7a2,2,0,0,0-3,2.6A14.7,14.7,0,0,1,42,25.9a14.2,14.2,0,0,1-3.5,9.7,2.2,2.2,0,0,0,.1,2.9A2.4,2.4,0,0,0,40,39a2.2,2.2,0,0,0,1.5-.6A18.4,18.4,0,0,0,46,25.9,18.2,18.2,0,0,0,41.5,13.7Z"
+                          />
+                          <path
+                            d="M38.7,30.9,35.4,26l3.3-4.9a2,2,0,1,0-3.4-2.2L33,22.4l-2.3-3.5a2,2,0,1,0-3.4,2.2L30.6,26l-3.3,4.9a2.1,2.1,0,0,0,.6,2.8A2,2,0,0,0,29,34a2.1,2.1,0,0,0,1.7-.9L33,29.6l2.3,3.5A2.1,2.1,0,0,0,37,34a2,2,0,0,0,1.1-.3A2.1,2.1,0,0,0,38.7,30.9Z"
+                          />
+                          <path
+                            d="M18,15H15.8l.5-3.5A3.9,3.9,0,0,1,20.2,8H22a2,2,0,0,0,0-4H20.2a8.1,8.1,0,0,0-7.9,6.9L11.7,15H9a2,2,0,0,0,0,4h2.2L8.7,36.5A3.9,3.9,0,0,1,4.8,40H4a2,2,0,0,0,0,4h.8a8.1,8.1,0,0,0,7.9-6.9L15.2,19H18a2,2,0,0,0,0-4Z"
+                          />
+                        </g>
+                      </g>
+                    </g>
+                  </svg>
+                  <span class="label">Scientific</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-dark btn-zero" data-type="NUMBER" data-value="ZERO">0</button>
+          <button class="btn btn-dark" data-type="NUMBER" data-value="DECIMAL">,</button>
+          <button class="btn btn-primary" data-type="UNARY_FUNCTION" data-value="EQUALS">=</button>
+        </div>
+      </div>
+
+      <div class="calc-overlay" id="calc-overlay"></div>
+      <div class="history-overlay" id="history-overlay">
+        <div class="history-menu">
+          <div class="done-button-wrapper">
+            <button class="done-button" id="done-button">Done</button>
+          </div>
+          <div class="history-list" id="history-list"></div>
+          <div class="edit-menu">
+            <button class="edit-button" id="edit-button">Edit</button>
+            <button class="clear-button" id="clear-button">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <template id="history-item-template">
+      <div class="historry-item-wrapper">
+        <div class="history-item">
+          <div class="expression"></div>
+          <div class="result"></div>
+        </div>
+        <img class="historry-bin" src="./assets/images/icon/bin.svg" alt="bin icon" />
+      </div>
+    </template>
+
+    <script type="module" src="./assets/js/app.js"></script>
+  </body>
+</html>
